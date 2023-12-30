@@ -13,3 +13,16 @@ Route::middleware([
     // Flow 2: topup to game 
     Route::get('/vietnam-prepaid-card/flow2', 'CardToGameFlow@index')->name('vpcard.flow2');
 });
+
+Route::middleware([
+    'web',
+    'admin'
+])->namespace('Hanoivip\VietnamPrepaidCard\Controllers')
+->prefix('ecmin')
+->group(function () {
+    Route::any('/vpcard/history', 'AdminController@webtopupHistory')->name('ecmin.vpcard.history');
+    //Route::any('/vpcard', 'AdminController@ops')->name('ecmin.webtopup');
+    //Route::any('/vpcard/retry', 'AdminController@retry')->name('ecmin.webtopup.retry');
+    Route::any('/vpcard/check', 'AdminController@check')->name('ecmin.vpcard.check');
+    Route::any('/vpcard/find-user-by-order', 'AdminController@findUserByOrder')->name('ecmin.vpcard.finduser');
+});

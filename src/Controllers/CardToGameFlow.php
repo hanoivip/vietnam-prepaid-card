@@ -31,7 +31,7 @@ class CardToGameFlow extends Controller
     {
         $method = config('vpcard.payment_method_id', '');
         $userId = Auth::user()->getAuthIdentifier();
-        $order = "CardToWebFlow@" . Str::random(6);
+        $order = "CardToGame@" . Str::random(6);
         $next = "CardToGame";
         try
         {
