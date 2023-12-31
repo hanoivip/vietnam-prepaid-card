@@ -200,29 +200,6 @@ class AdminController extends Controller
         }
     }
     
-    public function balanceRequest(Request $request)
-    {
-        $message = "";
-        $error = "";
-        $targetId = $request->input('tid');
-        if ($request->getMethod() == 'POST')
-        {
-            try
-            {
-                $gmId = Auth::user()->getAuthIdentifier();
-                $amount = $request->input('amount');
-                $reason = $request->input('reason');
-                $log = $this->request->request($gmId, $targetId, $reason, $amount);
-                $message = "get request, wait for approval";
-            }
-            catch (Exception $ex)
-            {
-                $error = $ex->getMessage();
-            }
-        }
-        return view('hanoivip.vpcard::admin.balance-request', ['message' => $message, 'error_message' => $error, 'tid' => $targetId]);
-    }
-    
     public function findUserByOrder(Request $request)
     {
         $message = "";

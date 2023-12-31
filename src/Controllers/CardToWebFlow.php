@@ -53,7 +53,14 @@ class CardToWebFlow extends Controller
             }
             else
             {
-                return view('hanoivip.vpcard::failure', ['error_message' => __('hanoivip.payment::webtopup.log-fail')]);
+                if ($request->ajax())
+                {
+                    return ['error' => 2, 'message' => '', 'data' => [] ];
+                }
+                else
+                {
+                    return view('hanoivip.vpcard::failure', ['error_message' => __('hanoivip.payment::webtopup.log-fail')]);
+                }
             }
         }
         catch (Exception $ex)
