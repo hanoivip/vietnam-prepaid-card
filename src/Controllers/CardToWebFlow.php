@@ -67,6 +67,10 @@ class CardToWebFlow extends Controller
         {
             Log::error("Webtopup index exception:" + $ex->getMessage());
             report($ex);
+            if ($request->ajax())
+            {
+                return ['error' => 3, 'message' => $ex->getMessage(), 'data' => [] ];
+            }
             return view('hanoivip.vpcard::failure', ['error_message' => __('hanoivip.payment::webtopup.exception')]);
         }
     }

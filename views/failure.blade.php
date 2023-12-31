@@ -4,6 +4,6 @@
 
 @section('content')
 
-<a href="{{ route('webtopup') }}"><button>Nạp lại</button></a>
+<a href="{{ route('vpcard.flow1') }}"><button>Nạp lại</button></a>
 
 @endsection
