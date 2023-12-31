@@ -15,7 +15,7 @@ class LibServiceProvider extends ServiceProvider
             __DIR__.'/../config' => config_path(),
         ]);
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-        //$this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
+        $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         $this->loadTranslationsFrom( __DIR__.'/../lang', 'hanoivip.vpcard');
         $this->mergeConfigFrom( __DIR__.'/../config/vpcard.php', 'vpcard');
