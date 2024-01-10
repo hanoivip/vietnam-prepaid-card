@@ -6,19 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Exception;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
-use Hanoivip\Game\Facades\GameHelper;
 use Hanoivip\PaymentContract\Facades\PaymentFacade;
 use Hanoivip\VietnamPrepaidCard\Services\WebtopupRepository;
 /**
  *
- * Flow 2: Web topup with prepaid card
- * - Target to game char
+ * Flow 2.1: Web topup with prepaid card
+ * - Target to game char (spec by game order)
  * @author hanoivip
  *
  */
-class CardToGameFlow extends Controller
+class CardToOrderFlow extends Controller
 {
     private $logs;
     
@@ -32,16 +30,10 @@ class CardToGameFlow extends Controller
     {
         $method = config('vpcard.payment_method_id', '');
         $userId = Auth::user()->getAuthIdentifier();
-        $order = "CardToGame@" . Str::random(6);
-        $next = "CardToGame";
-        $svid = $request->input('svid');
-        $role = $request->input('role');
+        $order = $request->input('order');
+        $next = "CardToOrder";
         try
         {
-            if (!empty($svid) && !empty($role))
-            {
-                GameHelper::saveUserDefaultRole($userId, "s$svid", $role);
-            }
             $result = PaymentFacade::preparePayment($order, $method, $next);
             if ($this->logs->saveLog($userId, $result->getTransId()))
             {

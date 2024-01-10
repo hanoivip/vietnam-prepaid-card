@@ -5,6 +5,7 @@ namespace Hanoivip\VietnamPrepaidCard;
 use Illuminate\Support\ServiceProvider;
 use Hanoivip\VietnamPrepaidCard\Services\CardToGame;
 use Hanoivip\VietnamPrepaidCard\Services\CardToWeb;
+use Hanoivip\VietnamPrepaidCard\Services\CardToOrder;
 
 class LibServiceProvider extends ServiceProvider
 {
@@ -28,5 +29,6 @@ class LibServiceProvider extends ServiceProvider
         ]);
         $this->app->bind('CardToWeb', CardToWeb::class);
         $this->app->bind('CardToGame', CardToGame::class);
+        $this->app->bind('CardToOrder', CardToOrder::class);
     }
 }

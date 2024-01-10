@@ -81,9 +81,14 @@ class CheckPendingReceipt implements ShouldQueue
                                     $ok = false;
                                 }
                             }
+                            break;
+                        case 'order':
+                            // get order from transaction and notify order get paid!
+                            break;
                         case 'web':
                         default:
                             $ok = $ok && BalanceFacade::add($this->userId, $result->getAmount(), "CardToCoin", 0, $result->getCurrency());
+                            break;
                     }
                     if ($ok)
                     {
