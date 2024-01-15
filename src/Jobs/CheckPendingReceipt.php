@@ -71,10 +71,10 @@ class CheckPendingReceipt implements ShouldQueue
                             }
                             else
                             {
-                                $result = GameHelper::rechargeByMoney($this->userId, $target->server, $result->getAmount(), $target->role);
-                                if (gettype($result) == 'boolean')
+                                $r = GameHelper::rechargeByMoney($this->userId, $target->server, $result->getAmount(), $target->role);
+                                if (gettype($r) == 'boolean')
                                 {
-                                    $ok = $ok && $result;
+                                    $ok = $ok && $r;
                                 }
                                 else
                                 {
