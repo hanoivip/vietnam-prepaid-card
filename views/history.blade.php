@@ -1,6 +1,6 @@
 @extends('hanoivip::layouts.app')
 
-@section('title', 'Lịch sử nạp thẻ webtopup')
+@section('title', 'Histórico de recarga de Webcoin')
 
 @push('scripts')
     <script src="/js/history.js"></script>

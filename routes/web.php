@@ -21,8 +21,7 @@ Route::middleware([
 ->prefix('ecmin')
 ->group(function () {
     Route::any('/vpcard/history', 'AdminController@webtopupHistory')->name('ecmin.vpcard.history');
-    //Route::any('/vpcard', 'AdminController@ops')->name('ecmin.webtopup');
-    //Route::any('/vpcard/retry', 'AdminController@retry')->name('ecmin.webtopup.retry');
+    // TODO: check and move to correct module??
     Route::any('/vpcard/check', 'AdminController@check')->name('ecmin.vpcard.check');
     Route::any('/vpcard/find-user-by-order', 'AdminController@findUserByOrder')->name('ecmin.vpcard.finduser');
 });
