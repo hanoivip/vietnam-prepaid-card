@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Hanoivip\PaymentContract\Facades\PaymentFacade;
 use Hanoivip\Payment\Facades\BalanceFacade;
 use Hanoivip\VietnamPrepaidCard\Services\WebtopupRepository;
+use Hanoivip\Shop\Facades\OrderFacade;
 
 /**
  *
@@ -34,11 +35,12 @@ class CardToWebFlow extends Controller
     {
         $method = config('vpcard.payment_method_id', '');
         $userId = Auth::user()->getAuthIdentifier();
-        $order = "CardToWebFlow@" . Str::random(6);
         $next = 'CardToWeb';
         try
         {
-            $result = PaymentFacade::preparePayment($order, $method, $next);
+            // create order
+            $order = OrderFacade::dummyOrder($userId);
+            $result = PaymentFacade::preparePayment($order->serial, $method, $next);
             if ($this->logs->saveLog($userId, $result->getTransId()))
             {
                 if ($request->ajax())

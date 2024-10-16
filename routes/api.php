@@ -7,5 +7,5 @@ Route::middleware('auth:api')->prefix('api')->namespace('Hanoivip\VietnamPrepaid
 	// keep path :(
     Route::any('/webtopup', 'CardToWebFlow@index');
     Route::any('/vietnam-prepaid-card/flow2', 'CardToGameFlow@index');
-    Route::any('/vietnam-prepaid-card/history', 'AppHistory@card');
+    Route::any('/vietnam-prepaid-card/history', 'AppHistory@cards');
 });

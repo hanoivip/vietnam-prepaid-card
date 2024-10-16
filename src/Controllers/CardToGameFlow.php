@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Hanoivip\Game\Facades\GameHelper;
 use Hanoivip\PaymentContract\Facades\PaymentFacade;
+use Hanoivip\Shop\Facades\OrderFacade;
 use Hanoivip\VietnamPrepaidCard\Services\WebtopupRepository;
 /**
  *
@@ -32,7 +33,6 @@ class CardToGameFlow extends Controller
     {
         $method = config('vpcard.payment_method_id', '');
         $userId = Auth::user()->getAuthIdentifier();
-        $order = "CardToGame@" . Str::random(6);
         $next = "CardToGame";
         $svid = $request->input('svid');
         $role = $request->input('role');
@@ -42,7 +42,8 @@ class CardToGameFlow extends Controller
             {
                 GameHelper::saveUserDefaultRole($userId, "s$svid", $role);
             }
-            $result = PaymentFacade::preparePayment($order, $method, $next);
+            $order = OrderFacade::dummyOrder($userId);
+            $result = PaymentFacade::preparePayment($order->serial, $method, $next);
             if ($this->logs->saveLog($userId, $result->getTransId()))
             {
                 if ($request->ajax())
